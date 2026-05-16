@@ -1,0 +1,110 @@
+table fVendas
+	lineageTag: 5c63e83e-0b09-4175-86d5-d02be87d244e
+
+	measure 'Faturamento Total' = ```
+			
+			SUMX(
+			    fVendas, 
+			    fVendas[Units] * RELATED('Product'[RetailPrice])
+			)
+			```
+		formatString: 0.00
+		lineageTag: 20371144-5ce3-41ce-b462-e5a7dc4b9ce4
+
+	measure 'Total Unidades' = SUM(fVendas[Units])
+		formatString: 0.000
+		lineageTag: 4225a401-1acc-4a93-b4b4-3b1a94cdf39c
+
+	column fSalesPrimaryKey
+		dataType: string
+		lineageTag: 3c4e0708-f408-466d-a8e2-caa79ffa368f
+		summarizeBy: none
+		sourceColumn: fSalesPrimaryKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProductID
+		dataType: string
+		lineageTag: 07827c2e-0f2f-419d-9029-bc4b82295db1
+		summarizeBy: none
+		sourceColumn: ProductID
+
+		annotation SummarizationSetBy = Automatic
+
+	column SalesRepID
+		dataType: string
+		lineageTag: c68e3c55-faba-4335-8cb4-045d8392b76f
+		summarizeBy: none
+		sourceColumn: SalesRepID
+
+		annotation SummarizationSetBy = Automatic
+
+	column Country
+		dataType: string
+		lineageTag: 2b1a1b8b-c106-46cf-8c5e-7b3d78f7f5c8
+		summarizeBy: none
+		sourceColumn: Country
+
+		annotation SummarizationSetBy = Automatic
+
+	column Town
+		dataType: string
+		lineageTag: c77c89bc-e89f-41ee-b9b7-0387016b0bd3
+		summarizeBy: none
+		sourceColumn: Town
+
+		annotation SummarizationSetBy = Automatic
+
+	column Date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 5ffa2b13-9379-4bfe-9718-56b859889331
+		summarizeBy: none
+		sourceColumn: Date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Units
+		dataType: int64
+		formatString: 0
+		lineageTag: b805059b-3513-4cf1-89b0-c03bba0c363d
+		summarizeBy: sum
+		sourceColumn: Units
+
+		annotation SummarizationSetBy = Automatic
+
+	column PercentOfStandardCost
+		dataType: string
+		lineageTag: bab86c39-c2bd-41fb-99ce-732dff040246
+		summarizeBy: none
+		sourceColumn: PercentOfStandardCost
+
+		annotation SummarizationSetBy = Automatic
+
+	column RevenueDiscount
+		dataType: string
+		lineageTag: ea0d8ca1-d878-4c12-83fd-5b845282c04a
+		summarizeBy: none
+		sourceColumn: RevenueDiscount
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fVendas = m
+		mode: import
+		source =
+				let
+				    Fonte = Table.Combine({#"Sales 2014", #"sales 2015", #"sales 2016", #"sales 2017"}),
+				    #"Dividir Coluna por Delimitador" = Table.SplitColumn(Fonte, "Location", Splitter.SplitTextByDelimiter(";", QuoteStyle.Csv), {"Location.1", "Location.2"}),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(#"Dividir Coluna por Delimitador",{{"Location.1", type text}, {"Location.2", type text}}),
+				    #"Colunas Renomeadas" = Table.RenameColumns(#"Tipo Alterado",{{"Location.1", "Country"}, {"Location.2", "Town"}}),
+				    #"Valor Substituído" = Table.ReplaceValue(#"Colunas Renomeadas",".","/",Replacer.ReplaceText,{"Date"}),
+				    #"Tipo Alterado1" = Table.TransformColumnTypes(#"Valor Substituído",{{"Date", type date}, {"Units", Int64.Type}})
+				in
+				    #"Tipo Alterado1"
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+

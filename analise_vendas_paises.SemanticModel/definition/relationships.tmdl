@@ -1,0 +1,29 @@
+relationship AutoDetected_2943d517-85c9-4b5e-99c2-9e2e093e8eed
+	fromColumn: fVendas.Town
+	toColumn: Geography.Town
+
+relationship AutoDetected_590bff3d-be9e-47a7-9ca4-342e265ee746
+	fromColumn: SubCategory.CategoryKey
+	toColumn: Categories.CategoryKey
+
+relationship AutoDetected_2bd46b28-6813-447b-a779-3ae86a41cd8c
+	fromColumn: Product.'Sub Category Key'
+	toColumn: SubCategory.SubCategoryKey
+
+relationship 5ebfffaf-a4d6-1721-aa3f-0ccec91d2562
+	fromColumn: fVendas.ProductID
+	toColumn: Product.ProductID
+
+relationship 1290d29d-0144-c814-25d3-f2ba27dc846e
+	fromColumn: fVendas.SalesRepID
+	toColumn: SalesRep.SalesRepID
+
+relationship 080c5671-140b-4e61-84ae-4ce9a0923e8c
+	joinOnDateBehavior: datePartOnly
+	fromColumn: dCalendario.Date
+	toColumn: LocalDateTable_82805081-67db-4772-ac15-835c0ae46c8a.Date
+
+relationship 3ba90511-1245-0c9e-79bc-235b40ed0eae
+	fromColumn: fVendas.Date
+	toColumn: dCalendario.Date
+

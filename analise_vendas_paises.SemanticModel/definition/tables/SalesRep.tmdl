@@ -1,0 +1,36 @@
+table SalesRep
+	lineageTag: 8adee862-1138-4087-898a-0b88c1e6e654
+
+	column SalesRepID
+		dataType: int64
+		formatString: 0
+		lineageTag: c1f25e3d-20ef-4976-8646-ab533c098440
+		summarizeBy: none
+		sourceColumn: SalesRepID
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Sales Rep Name'
+		dataType: string
+		lineageTag: d6d8acb7-b0e2-4ce0-ba1c-c7239015890d
+		summarizeBy: none
+		sourceColumn: Sales Rep Name
+
+		annotation SummarizationSetBy = Automatic
+
+	partition SalesRep = m
+		mode: import
+		source =
+				let
+				    Fonte = Excel.Workbook(File.Contents("C:\Users\betin\Desktop\case_1\dados-20260401T170821Z-1-001\dados\Dimensions\SalesRep.xlsx"), null, true),
+				    SalesRep_Table = Fonte{[Item="SalesRep",Kind="Table"]}[Data],
+				    #"Tipo Alterado" = Table.TransformColumnTypes(SalesRep_Table,{{"SalesRepID", type text}, {"Sales Rep Name", type text}}),
+				    #"Valor Substituído" = Table.ReplaceValue(#"Tipo Alterado","ID - ","",Replacer.ReplaceText,{"SalesRepID"}),
+				    #"Tipo Alterado1" = Table.TransformColumnTypes(#"Valor Substituído",{{"SalesRepID", Int64.Type}})
+				in
+				    #"Tipo Alterado1"
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+

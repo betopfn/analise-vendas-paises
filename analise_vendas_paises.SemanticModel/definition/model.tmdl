@@ -1,0 +1,26 @@
+model Model
+	culture: pt-BR
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: pt-BR
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBI_QueryOrder = ["Geography","Categories","SalesRep","SubCategory","Product","Sales 2014","sales 2015","sales 2016","sales 2017","fVendas"]
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table Geography
+ref table Categories
+ref table SalesRep
+ref table SubCategory
+ref table Product
+ref table fVendas
+ref table DateTableTemplate_91ccebbb-3143-42b2-8761-3739e6da735d
+ref table dCalendario
+ref table LocalDateTable_82805081-67db-4772-ac15-835c0ae46c8a
+
+ref cultureInfo pt-BR
+

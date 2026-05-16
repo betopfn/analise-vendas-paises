@@ -1,0 +1,14 @@
+ProductID;Sub Category Key;Color;ProductName;RetailPrice;StandardCost
+xxxxx1;03;Red;Alder;23.95;7.55
+xxxxx2;2;Blue;Linder;23.95;7.55
+xxxxx3;2;Green;Magnum;23.95;7.55
+"xxxxx4;1;Red;Quad;43,95;13.75"
+"xxxxx5;1;Blue;Black Monk;43,95;13.75"
+"xxxxx6;04;Green;Quad;43,95;13.75"
+xxxxx7;1;Red;Bing;26.95;8.25
+xxxxx8;03;Blue;VanHelen;26.95;8.25
+xxxxx9;1;Green;Magnum;26.95;8.25
+xxxx10;01;Florescent Pink;Carlota;29.95;9.15
+xxxx11;4;Florescent Blue;Carlota;29.95;9.15
+xxxxx7;1;Red;Bing;26.95;8.25
+xxxx10;1;Florescent Pink;Carlota;29.95;9.15

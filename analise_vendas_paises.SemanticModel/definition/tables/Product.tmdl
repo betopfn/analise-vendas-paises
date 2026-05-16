@@ -1,0 +1,74 @@
+table Product
+	lineageTag: 35c90f57-31af-4650-8ca8-0a5ea8dd3cb2
+
+	column ProductID
+		dataType: int64
+		formatString: 0
+		lineageTag: d3ade113-f7a8-4d8b-8c52-4e3f781aa884
+		summarizeBy: none
+		sourceColumn: ProductID
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Sub Category Key'
+		dataType: int64
+		formatString: 0
+		lineageTag: 7b263c8a-e25d-44bf-91d2-9de356e8e3ce
+		summarizeBy: none
+		sourceColumn: Sub Category Key
+
+		annotation SummarizationSetBy = Automatic
+
+	column Color
+		dataType: string
+		lineageTag: 57d36848-0096-4c56-9524-647853b73b62
+		summarizeBy: none
+		sourceColumn: Color
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProductName
+		dataType: string
+		lineageTag: 7b2cdc45-6970-415c-ab2a-686898ec6413
+		summarizeBy: none
+		sourceColumn: ProductName
+
+		annotation SummarizationSetBy = Automatic
+
+	column RetailPrice
+		dataType: int64
+		formatString: 0
+		lineageTag: 42091de7-4d3f-412b-ad9a-1b6ec603c047
+		summarizeBy: sum
+		sourceColumn: RetailPrice
+
+		annotation SummarizationSetBy = Automatic
+
+	column StandardCost
+		dataType: int64
+		formatString: 0
+		lineageTag: a4bf93b0-ccbe-42e5-85f0-5249908ce425
+		summarizeBy: sum
+		sourceColumn: StandardCost
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Product = m
+		mode: import
+		source =
+				let
+				    Fonte = Csv.Document(File.Contents("C:\Users\betin\Desktop\case_1\dados-20260401T170821Z-1-001\dados\dimensoes_csv\Product.csv"),[Delimiter=";", Columns=6, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    #"Cabeçalhos Promovidos" = Table.PromoteHeaders(Fonte, [PromoteAllScalars=true]),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(#"Cabeçalhos Promovidos",{{"ProductID", type text}, {"Sub Category Key", Int64.Type}, {"Color", type text}, {"ProductName", type text}, {"RetailPrice", Int64.Type}, {"StandardCost", Int64.Type}}),
+				    #"Valor Substituído" = Table.ReplaceValue(#"Tipo Alterado","xxxxx","",Replacer.ReplaceText,{"ProductID"}),
+				    #"Valor Substituído1" = Table.ReplaceValue(#"Valor Substituído","xxxx","",Replacer.ReplaceText,{"ProductID"}),
+				    #"Texto Extraído Antes do Delimitador" = Table.TransformColumns(#"Valor Substituído1", {{"ProductID", each Text.BeforeDelimiter(_, ";"), type text}}),
+				    #"Tipo Alterado1" = Table.TransformColumnTypes(#"Texto Extraído Antes do Delimitador",{{"ProductID", Int64.Type}}),
+				    #"Duplicatas Removidas" = Table.Distinct(#"Tipo Alterado1", {"ProductID"})
+				in
+				    #"Duplicatas Removidas"
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+

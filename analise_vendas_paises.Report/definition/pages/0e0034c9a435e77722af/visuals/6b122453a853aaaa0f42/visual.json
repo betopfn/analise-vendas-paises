@@ -1,0 +1,39 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.8.0/schema.json",
+  "name": "6b122453a853aaaa0f42",
+  "position": {
+    "x": 712.23097112860887,
+    "y": 377.95275590551182,
+    "z": 3000,
+    "height": 302.36220472440942,
+    "width": 540.89238845144359,
+    "tabOrder": 1000
+  },
+  "visual": {
+    "visualType": "map",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Geography"
+                    }
+                  },
+                  "Property": "Town"
+                }
+              },
+              "queryRef": "Geography.Town",
+              "nativeQueryRef": "Town",
+              "active": true
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

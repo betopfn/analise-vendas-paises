@@ -1,0 +1,38 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.8.0/schema.json",
+  "name": "51408200ecb9f47bb3cd",
+  "position": {
+    "x": 488.81889763779526,
+    "y": 58.792650918635168,
+    "z": 1000,
+    "height": 299.002624671916,
+    "width": 300.68241469816275,
+    "tabOrder": 4000
+  },
+  "visual": {
+    "visualType": "clusteredColumnChart",
+    "query": {
+      "queryState": {
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fVendas"
+                    }
+                  },
+                  "Property": "Total Unidades"
+                }
+              },
+              "queryRef": "fVendas.Total Unidades",
+              "nativeQueryRef": "Total Unidades"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

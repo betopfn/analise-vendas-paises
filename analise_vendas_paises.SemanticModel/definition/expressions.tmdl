@@ -1,0 +1,48 @@
+expression 'Sales 2014' =
+		let
+		    Fonte = Csv.Document(File.Contents("C:\Users\betin\Desktop\case_1\dados-20260401T170821Z-1-001\dados\Sales\Sales 2014.csv"),[Delimiter=",", Columns=8, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+		    #"Cabeçalhos Promovidos" = Table.PromoteHeaders(Fonte, [PromoteAllScalars=true])
+		in
+		    #"Cabeçalhos Promovidos"
+	lineageTag: e5d677bf-6889-47a9-8f72-6d324af1ce4a
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+
+expression 'sales 2015' =
+		let
+		    Fonte = Csv.Document(File.Contents("C:\Users\betin\Desktop\case_1\dados-20260401T170821Z-1-001\dados\Sales\sales 2015.csv"),[Delimiter=",", Columns=8, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+		    #"Cabeçalhos Promovidos" = Table.PromoteHeaders(Fonte, [PromoteAllScalars=true])
+		in
+		    #"Cabeçalhos Promovidos"
+	lineageTag: a095f643-98e4-4fce-a8c0-9b0f31e699f5
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+
+expression 'sales 2016' =
+		let
+		    Fonte = Csv.Document(File.Contents("C:\Users\betin\Desktop\case_1\dados-20260401T170821Z-1-001\dados\Sales\sales 2016.csv"),[Delimiter=",", Columns=8, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+		    #"Cabeçalhos Promovidos" = Table.PromoteHeaders(Fonte, [PromoteAllScalars=true])
+		in
+		    #"Cabeçalhos Promovidos"
+	lineageTag: 7d352720-ff64-4220-8fef-efad2d06a36f
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+
+expression 'sales 2017' =
+		let
+		    Fonte = Csv.Document(File.Contents("C:\Users\betin\Desktop\case_1\dados-20260401T170821Z-1-001\dados\Sales\sales 2017.csv"),[Delimiter=",", Columns=8, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+		    #"Cabeçalhos Promovidos" = Table.PromoteHeaders(Fonte, [PromoteAllScalars=true])
+		in
+		    #"Cabeçalhos Promovidos"
+	lineageTag: 0edf763d-0ece-4e75-a1c5-cb19cfacaf47
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+

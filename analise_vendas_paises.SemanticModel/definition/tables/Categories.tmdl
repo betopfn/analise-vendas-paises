@@ -1,0 +1,35 @@
+table Categories
+	lineageTag: d9e93a3e-f943-437d-9ea6-8bb180a5d6b1
+
+	column CategoryKey
+		dataType: int64
+		formatString: 0
+		lineageTag: bcc69557-b369-461b-bb45-153a030e08d1
+		summarizeBy: none
+		sourceColumn: CategoryKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column Category
+		dataType: string
+		lineageTag: 463b6c5d-33d4-4626-a31d-729fa01fed62
+		summarizeBy: none
+		sourceColumn: Category
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Categories = m
+		mode: import
+		source =
+				let
+				    Fonte = Excel.Workbook(File.Contents("C:\Users\betin\Desktop\case_1\dados-20260401T170821Z-1-001\dados\Dimensions\Categories.xlsx"), null, true),
+				    Categories_Sheet = Fonte{[Item="Categories",Kind="Sheet"]}[Data],
+				    #"Cabeçalhos Promovidos" = Table.PromoteHeaders(Categories_Sheet, [PromoteAllScalars=true]),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(#"Cabeçalhos Promovidos",{{"CategoryKey", Int64.Type}, {"Category", type text}})
+				in
+				    #"Tipo Alterado"
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+
